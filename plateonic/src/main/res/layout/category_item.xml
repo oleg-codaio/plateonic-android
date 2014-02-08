@@ -1,0 +1,24 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/grid_color_selector">
+
+    <ImageView
+        android:focusableInTouchMode="false"
+        android:layout_gravity="top|left"
+        android:id="@+id/image"
+        android:background="@android:color/black"
+        android:padding="1px"
+        android:scaleType="centerCrop"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/text"
+        style="@style/TextView.Category"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center" />
+
+</FrameLayout>

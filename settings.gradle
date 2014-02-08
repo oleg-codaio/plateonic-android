@@ -1,2 +1,3 @@
 include ':plateonic'
 include ':libraries:facebook'
+include ':libraries:glassactionbar'

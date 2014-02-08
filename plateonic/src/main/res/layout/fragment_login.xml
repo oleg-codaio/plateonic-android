@@ -1,19 +1,39 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:clipChildren="false"
+    android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <com.facebook.widget.LoginButton
-        android:id="@+id/authButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_gravity="center"
+        android:clipChildren="false"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/app_logo"
+            android:layout_gravity="center"
+            android:layout_width="200dip"
+            android:layout_height="200dip"
+            android:src="@drawable/big_icon"/>
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/app_title"
+            android:layout_gravity="center"
+            android:layout_marginTop="-5dp"
+            android:layout_width="220dip"
+            android:layout_height="wrap_content"
+            android:src="@drawable/app_title"/>
+
+        <com.facebook.widget.LoginButton
+            android:id="@+id/authButton"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp" />
+    </LinearLayout>
+
+</FrameLayout>
