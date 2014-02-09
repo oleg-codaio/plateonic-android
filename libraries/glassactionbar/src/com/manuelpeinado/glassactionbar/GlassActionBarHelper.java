@@ -232,6 +232,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         //
         if (content instanceof GridView) {
             int numColumns = ((GridView) content).getNumColumns();
+            Log.e(TAG, " === WIDTH: " + width);
             actionBarSection = Bitmap.createBitmap(scaled, 0, top / downSampling, width / downSampling,
                     actionBarHeight / downSampling);
         } else {

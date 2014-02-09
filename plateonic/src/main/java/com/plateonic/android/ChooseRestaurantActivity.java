@@ -34,6 +34,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
+import com.plateonic.R;
+import com.plateonic.android.com.plateonic.utils.FacebookDetails;
 import com.plateonic.android.com.plateonic.utils.VolleySingleton;
 
 import org.json.JSONArray;
@@ -58,8 +60,10 @@ public class ChooseRestaurantActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chooserest);
-        if (LoginActivity.mName != null) {
-            setTitle(LoginActivity.mName + ", choose a restaurant");
+        FacebookDetails userDetails = (FacebookDetails) getIntent().getSerializableExtra("fb");
+
+        if (userDetails != null) {
+            setTitle(userDetails.getFirstName() + ", choose a restaurant");
         } else {
             setTitle("Choose a restaurant");
         }
@@ -135,7 +139,11 @@ public class ChooseRestaurantActivity extends ActionBarActivity {
             mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Toast.makeText(getActivity(), "Clicked on: " + i, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), BrowsePeopleActivity.class);
+                    intent.putExtras(getActivity().getIntent());
+                    intent.putExtra("restaurant", adapterView.getItemAtPosition(i).toString());
+                    getActivity().startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             });
 
@@ -260,7 +268,7 @@ public class ChooseRestaurantActivity extends ActionBarActivity {
 
                     restName.setText(rest.optString("name", "[Unknown]"));
                     JSONObject addr = (JSONObject) rest.get("address_obj");
-                    StringBuilder addrText =  new StringBuilder();
+                    StringBuilder addrText = new StringBuilder();
                     addrText.append(addr.optString("street1"));
                     addrText.append('\n');
                     addrText.append(addr.optString("city"));
@@ -283,7 +291,7 @@ public class ChooseRestaurantActivity extends ActionBarActivity {
                     // also bad practice to catch all exceptions, for now it's fine
                     Toast.makeText(mActivity, "Error. Please try again in a bit.", Toast.LENGTH_SHORT).show();
                     Log.e(TAG, "ERROR: " + rest.toString(), e);
-                 }
+                }
 
                 return convertView;
             }

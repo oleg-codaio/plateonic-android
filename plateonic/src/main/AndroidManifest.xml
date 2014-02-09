@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.plateonic.android">
+    package="com.plateonic">
 
     <uses-sdk
         android:targetSdkVersion="19"
@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -17,7 +19,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.plateonic.android.LoginActivity"
+            android:name=".android.LoginActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
             <intent-filter>
@@ -33,10 +35,14 @@
             android:theme="@style/AppThemeNoActionBar" />
 
         <activity
-            android:name="com.plateonic.android.ChooseWhereEatActivity"
+            android:name=".android.ChooseWhereEatActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.plateonic.android.ChooseRestaurantActivity"
+            android:name=".android.ChooseRestaurantActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".android.BrowsePeopleActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

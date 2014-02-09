@@ -89,6 +89,10 @@ public class Utils {
             bmp.recycle();
             bmp = null;
         }
+        // test fill with red
+//        Paint paintC = new Paint();
+//        paintC.setColor(Color.RED);
+//        bigcanvas.drawRect(0, 0, bigbitmap.getWidth(), bigbitmap.getHeight(), paintC);
 
         return bigbitmap;
     }

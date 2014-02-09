@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.facebook.Session;
 import com.manuelpeinado.glassactionbar.GlassActionBarHelper;
 import com.manuelpeinado.glassactionbar.GridViewScrollObserver;
+import com.plateonic.R;
+import com.plateonic.android.com.plateonic.utils.FacebookDetails;
 
 import java.io.Serializable;
 
@@ -47,8 +49,10 @@ public class ChooseWhereEatActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose);
 
-        if (LoginActivity.mName != null) {
-            setTitle(LoginActivity.mName + ", " + getString(R.string.choose_category_question).toLowerCase());
+        FacebookDetails details = (FacebookDetails) getIntent().getSerializableExtra("fb");
+        String firstName = details.getFirstName();
+        if (firstName != null) {
+            setTitle(firstName + ", " + getString(R.string.choose_category_question).toLowerCase());
         } else {
             setTitle(getString(R.string.choose_category_question));
         }
@@ -67,6 +71,7 @@ public class ChooseWhereEatActivity extends ActionBarActivity {
                 Session.getActiveSession().closeAndClearTokenInformation();
                 Intent i = getBaseContext().getPackageManager()
                         .getLaunchIntentForPackage(getBaseContext().getPackageName());
+                i.putExtras(getIntent());
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
@@ -134,6 +139,7 @@ public class ChooseWhereEatActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), ChooseRestaurantActivity.class);
+                intent.putExtras(getActivity().getIntent());
                 intent.putExtra("cuisine", CATEGORIES[i]);
 
                 startActivity(intent);
