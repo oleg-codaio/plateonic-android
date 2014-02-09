@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="85dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/rest_color_selector">
+
+    <RatingBar
+        android:id="@+id/rest_rating"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rating="5"
+        android:isIndicator="true"
+        android:layout_alignParentBottom="true"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_alignParentRight="true"
+        android:focusable="false"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/rest_distance"
+        android:text="0.9 mi"
+        android:textSize="30sp"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/rest_rating"
+        android:layout_marginRight="3dp"
+        android:layout_width="wrap_content"
+        android:textColor="#ccc"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <TextView
+        android:id="@+id/rest_name"
+        android:layout_marginLeft="12dp"
+        android:text="Restaurant name"
+        android:textColor="@android:color/white"
+        android:singleLine="true"
+        android:textSize="25sp"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:fadingEdge="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <TextView
+        android:id="@+id/rest_address"
+        android:layout_marginLeft="12dp"
+        android:text="123 Test Rd,\nBoston, MA 02115"
+        android:textSize="14sp"
+        android:ellipsize="marquee"
+        android:layout_marginBottom="3dp"
+        android:textColor="#ccc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+
+</RelativeLayout>
