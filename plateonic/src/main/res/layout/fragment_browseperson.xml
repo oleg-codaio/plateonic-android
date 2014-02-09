@@ -1,12 +1,32 @@
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:paddingTop="?attr/actionBarSize"
-    android:layout_marginTop="5dp"
-    android:id="@+id/people"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1.0"
-    android:requiresFadingEdge="vertical"
-    android:dividerHeight="8dp"
-    android:divider="@android:color/transparent"
-    android:fadingEdge="vertical"
-    android:cacheColorHint="@android:color/transparent" />
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:id="@+id/people_layout"
+    android:paddingTop="?attr/actionBarSize">
+
+    <Button
+        android:id="@+id/checkin"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Let's go here"
+        style="@style/Button.Checkin"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp" />
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/people"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
+        android:requiresFadingEdge="vertical"
+        android:dividerHeight="8dp"
+        android:divider="@android:color/transparent"
+        android:fadingEdge="vertical"
+        android:cacheColorHint="@android:color/transparent" />
+
+
+</LinearLayout>
+

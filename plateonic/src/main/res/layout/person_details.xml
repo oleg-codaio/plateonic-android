@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/person_name"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"
+        android:text="John S."
+        android:textColor="@android:color/black"
+        android:singleLine="true"
+        android:textSize="35sp"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:fadingEdge="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/person_avatar"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="3dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/default_prof_pic"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" />
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button android:text="Facebook"
+                android:id="@+id/fb"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/fb" />
+
+            <Button android:text="Call 0000000000"
+                android:id="@+id/call"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/phone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

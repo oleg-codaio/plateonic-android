@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="85dp"
+    android:orientation="horizontal"
+    android:layout_margin="10dp"
+    android:background="@drawable/people_color_selector">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/person_avatar"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="3dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/default_prof_pic" />
+
+    <TextView
+        android:id="@+id/person_name"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"
+        android:text="John S."
+        android:textColor="@android:color/white"
+        android:singleLine="true"
+        android:textSize="25sp"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:fadingEdge="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+
+</LinearLayout>
