@@ -1,9 +1,9 @@
-package com.plateonic.android.com.plateonic.android.widgets;
+package com.manuelpeinado.glassactionbar;
 
-import android.util.Log;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.GridView;
-
-import com.manuelpeinado.glassactionbar.ListViewScrollObserver;
 
 /**
  * Created by Oleg on 2/8/14.
@@ -23,11 +23,6 @@ import com.manuelpeinado.glassactionbar.ListViewScrollObserver;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
-import android.widget.ListView;
 
 public class GridViewScrollObserver implements OnScrollListener {
     private GridView mGridView;
@@ -59,10 +54,10 @@ public class GridViewScrollObserver implements OnScrollListener {
         if (lastFirstVisibleItem == firstVisibleItem) {
             delta = lastTop - top;
         } else if (firstVisibleItem > lastFirstVisibleItem) {
-            skipped = (firstVisibleItem - lastFirstVisibleItem) - 1;
+            skipped = (firstVisibleItem - lastFirstVisibleItem) / mGridView.getNumColumns() - 1;
             delta = skipped * height + lastHeight + lastTop - top;
         } else {
-            skipped = (lastFirstVisibleItem - firstVisibleItem) - 1;
+            skipped = (lastFirstVisibleItem - firstVisibleItem) / mGridView.getNumColumns() - 1;
             delta = skipped * -height + lastTop - (height + top);
         }
         boolean exact = skipped == 0;

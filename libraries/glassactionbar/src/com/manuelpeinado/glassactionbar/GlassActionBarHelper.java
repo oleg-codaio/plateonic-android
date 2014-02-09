@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -69,16 +70,16 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     }
 
     public View createView(Context context) {
-        int[] attrs = { android.R.attr.windowBackground };
-        
-     // Need to get resource id of style pointed to from actionBarStyle
+        int[] attrs = {android.R.attr.windowBackground};
+
+        // Need to get resource id of style pointed to from actionBarStyle
         TypedValue outValue = new TypedValue();
         context.getTheme().resolveAttribute(android.R.attr.windowBackground, outValue, true);
-        
+
         TypedArray style = context.getTheme().obtainStyledAttributes(outValue.resourceId, attrs);
         windowBackground = style.getDrawable(0);
         style.recycle();
-            
+
         LayoutInflater inflater = LayoutInflater.from(context);
         frame = (FrameLayout) inflater.inflate(R.layout.gab__frame, null);
         content = inflater.inflate(contentLayout, (ViewGroup) frame, false);
@@ -150,7 +151,8 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
     public void onGlobalLayout() {
         if (verbose) Log.v(TAG, "onGlobalLayout()");
         if (width != 0) {
-            if (verbose) Log.v(TAG, "onGlobalLayout() - returning because not first time it's called");
+            if (verbose)
+                Log.v(TAG, "onGlobalLayout() - returning because not first time it's called");
             return;
         }
         int widthMeasureSpec = MeasureSpec.makeMeasureSpec(frame.getWidth(), MeasureSpec.AT_MOST);
@@ -163,7 +165,7 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         content.measure(widthMeasureSpec, heightMeasureSpec);
         width = frame.getWidth();
         height = content.getMeasuredHeight();
-        lastScrollPosition = scrollView != null ? scrollView.getScrollY() : 0; 
+        lastScrollPosition = scrollView != null ? scrollView.getScrollY() : 0;
         invalidate();
     }
 
@@ -184,13 +186,15 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
         scaled = Utils.drawViewToBitmap(scaled, content, width, height, downSampling, windowBackground);
 
         long delta = System.nanoTime() - start;
-        if (verbose) Log.v(TAG, "computeBlurOverlay() - drawing layout to canvas took " + delta/1e6f + " ms");
+        if (verbose)
+            Log.v(TAG, "computeBlurOverlay() - drawing layout to canvas took " + delta / 1e6f + " ms");
 
         if (verbose) Log.v(TAG, "computeBlurOverlay() - starting blur task");
         startBlurTask();
 
         if (scrollView != null) {
-            if (verbose) Log.v(TAG, "computeBlurOverlay() - restoring scroll from " + scrollView.getScrollY() + " to " + scrollPosition);
+            if (verbose)
+                Log.v(TAG, "computeBlurOverlay() - restoring scroll from " + scrollView.getScrollY() + " to " + scrollPosition);
             scrollView.scrollTo(0, scrollPosition);
         }
     }
@@ -217,19 +221,33 @@ public class GlassActionBarHelper implements OnGlobalLayoutListener, OnScrollCha
             top = 0;
         }
         if (!force && lastScrollPosition == top) {
-            if (verbose) Log.v(TAG, "updateBlurOverlay() - returning because scroll position hasn't changed");
+            if (verbose)
+                Log.v(TAG, "updateBlurOverlay() - returning because scroll position hasn't changed");
             return;
         }
         lastScrollPosition = top;
-        Bitmap actionBarSection = Bitmap.createBitmap(scaled, 0, top / downSampling, width / downSampling,
-                actionBarHeight / downSampling);
+
+        Bitmap actionBarSection;
+
+        //
+        if (content instanceof GridView) {
+            int numColumns = ((GridView) content).getNumColumns();
+            actionBarSection = Bitmap.createBitmap(scaled, 0, top / downSampling, width / downSampling,
+                    actionBarHeight / downSampling);
+        } else {
+            actionBarSection = Bitmap.createBitmap(scaled, 0, top / downSampling, width / downSampling,
+                    actionBarHeight / downSampling);
+        }
+
         // Blur here until background finished (will make smooth jerky during the first second or so).
         Bitmap blurredBitmap;
         if (isBlurTaskFinished()) {
-            if (verbose) Log.v(TAG, "updateBlurOverlay() - blur task finished, no need to blur content under action bar");
+            if (verbose)
+                Log.v(TAG, "updateBlurOverlay() - blur task finished, no need to blur content under action bar");
             blurredBitmap = actionBarSection;
         } else {
-            if (verbose) Log.v(TAG, "updateBlurOverlay() - blur task not finished, blurring content under action bar");
+            if (verbose)
+                Log.v(TAG, "updateBlurOverlay() - blur task not finished, blurring content under action bar");
             blurredBitmap = Blur.apply(frame.getContext(), actionBarSection);
         }
         Bitmap enlarged = Bitmap.createScaledBitmap(blurredBitmap, width, actionBarHeight, false);

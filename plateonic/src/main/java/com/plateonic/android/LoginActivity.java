@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +12,22 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.facebook.Request;
+import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphUser;
 
 import java.lang.ref.WeakReference;
 
 public class LoginActivity extends FragmentActivity {
 
     public static final int SPLASH_SCREEN_DELAY_MS = 1500;
+
+    // statics are bad but for now, whatever
+    public static String mName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +131,20 @@ public class LoginActivity extends FragmentActivity {
         protected void goNext() {
             // once the session is open, continue to the next activity
             new Handler().postDelayed(new GoToNextActivityRunnable(this), mDontDelay ? 1000 : SPLASH_SCREEN_DELAY_MS);
+
+            // also get user's name
+            Request.executeMeRequestAsync(Session.getActiveSession(), new Request.GraphUserCallback() {
+
+                // callback after Graph API response with user object
+                @Override
+                public void onCompleted(GraphUser user, Response response) {
+                    if (user != null) {
+                        //Toast.makeText(getActivity(), "Hello, " + user.getFirstName() + "!", Toast.LENGTH_LONG).show();
+                        mName = user.getFirstName();
+                    }
+                }
+            });
+
         }
 
         private static class GoToNextActivityRunnable implements Runnable {

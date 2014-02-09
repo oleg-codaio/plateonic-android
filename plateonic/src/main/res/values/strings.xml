@@ -27,5 +27,6 @@
     <string name="mexic">Mexican</string>
     <string name="pizza">Pizza</string>
     <string name="veget">Vegetarian</string>
+    <string name="action_tripadvisor">Powered by TripAdvisor</string>
 
 </resources>
